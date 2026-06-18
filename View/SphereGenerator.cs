@@ -35,7 +35,10 @@ public class SphereGenerator : MonoBehaviour // 球状に盤面を生成するFa
                         local_radius * Mathf.Sin(lo_rad) * Mathf.Sin(la_rad) + transform.position.z
                     );
                     GameObject obj = Instantiate(prefab, pos, Quaternion.identity, transform);
-                    // ここでobjにアタッチされたコンポーネントの値を変更する
+                    CellView view = obj.GetComponent<CellView>();
+                    view.vL = l;
+                    view.vX = lo;
+                    view.vY = la;
                     objs[l, lo, la] = obj;
                 }
             }
