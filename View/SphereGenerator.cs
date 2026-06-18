@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class SphereGenerator : MonoBehaviour
+public class SphereGenerator : MonoBehaviour // 球状に盤面を生成するFactoryクラス
 {
     [SerializeField] private GameObject prefab;
     [SerializeField] private float radius;
     [SerializeField] private float longtitudeInterval; // 緯度
     [SerializeField] private float latitudeInterval; // 経度
     [SerializeField] private int layer;
-    [SerializeField] private float reductionRatioPerLayer;
+    [SerializeField] private float reductionRatioPerLayer; // 半径の縮小率
 
     void Start()
     {
@@ -15,15 +15,18 @@ public class SphereGenerator : MonoBehaviour
     }
     public void GenerateSphere()
     {
+        int loCount = (int)(360f / longtitudeInterval); // 縦線の数
+        int laCount = (int)(180f / latitudeInterval); // 横線の数
         float local_radius = radius;
         for (int l = 0; l < layer; l++)
         {
-            for (float lo = longtitudeInterval; lo < 360f - longtitudeInterval; lo+=longtitudeInterval)
+            for (int lo = 0; lo < loCount; lo++)
             {
-                for (float la = latitudeInterval; la <= 180f - latitudeInterval; la+=latitudeInterval)
+                for (int la = 0; la < laCount; la++)
                 {
-                    float lo_rad = lo * Mathf.Deg2Rad;
-                    float la_rad = la * Mathf.Deg2Rad;
+                    if (la == 0) continue;
+                    float lo_rad = lo * longtitudeInterval * Mathf.Deg2Rad;
+                    float la_rad = la * latitudeInterval * Mathf.Deg2Rad;
                     Vector3 pos = new Vector3
                     (
                         local_radius * Mathf.Cos(lo_rad) * Mathf.Sin(la_rad) + transform.position.x,
