@@ -19,9 +19,8 @@ public class SphereGenerator : MonoBehaviour // 球状に盤面を生成するFa
         {
             for (int lo = 0; lo < loCount; lo++)
             {
-                for (int la = 0; la < laCount; la++)
+                for (int la = 1; la < laCount; la++) // 一番上に置くと重なるので置かない
                 {
-                    if (la == 0) continue; // 一番上に置くと重なるので置かない
                     float lo_rad = lo * stgs.longtitudeInterval * Mathf.Deg2Rad;
                     float la_rad = la * stgs.latitudeInterval * Mathf.Deg2Rad;
                     Vector3 pos = new Vector3
