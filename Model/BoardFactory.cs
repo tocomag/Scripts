@@ -22,7 +22,7 @@ public class BoardFactory // 内部処理で扱う盤面情報を生成するFac
         Cell[,,] cells = new Cell[stgs.layer, loCount, laCount];
         for (int l = 0; l < stgs.layer; l++)
         {
-            for (int lo = 0; lo < loCount; lo++) // 一番上は重なるので考えないものとする
+            for (int lo = 0; lo < loCount; lo++) // y=0のマスは重複しないよう存在しない
             {
                 for (int la = 1; la < laCount; la++)
                 {
@@ -46,9 +46,9 @@ public class BoardFactory // 内部処理で扱う盤面情報を生成するFac
             for (int i = 0; i < neighbors.GetLength(0); i++)
             {
                 int nx = x + neighbors[i, 0];
-                int ny = y + neighbors[i, 1];
+                int ny = y + neighbors[i, 1]; // y=0のマスは重複しないよう存在しない
                 if (ny <= 0 || ny >= laCount) continue;
-                int true_nx = (nx % loCount + loCount) % loCount;
+                int true_nx = (nx % loCount + loCount) % loCount; // x座標が球を循環するようにしてる(mod的考え方)
                 Cell neighbor_cell = cells[layer, true_nx, ny];
                 neighbor_cell.aroundMineCount++;
                 Debug.Log($"({layer},{true_nx},{ny})が地雷に近接しているマスです");
