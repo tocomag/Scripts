@@ -27,7 +27,7 @@ public class BoardFactory // 内部処理で扱う盤面情報を生成するFac
                 for (int la = 1; la < laCount; la++)
                 {
                     // Debug.Log($"({l},{lo},{la})という添え字番号にCellが格納されました");
-                    cells[l, lo, la] = new Cell(l, lo, la, false, false, false, 0);
+                    cells[l, lo, la] = new Cell(l, lo, la, stgs.cellHealth, false, false, false, 0);
                 }
             }
         }

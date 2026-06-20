@@ -9,4 +9,7 @@ public class BoardSettings : ScriptableObject
     public int layer;
     public float reductionRatioPerLayer; // 半径の縮小率
     public int mines; // 盤面に存在する地雷の総数
+    public int cellHealth; // マスの体力
+    public int playerDamage; // プレイヤーの攻撃力
+    public int mineDamage; // 地雷の攻撃力
 }
