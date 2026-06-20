@@ -8,6 +8,12 @@ public class BoardFactory // 内部処理で扱う盤面情報を生成するFac
     {
         this.stgs = stgs;
     }
+    private int[,] neighbors =
+    {
+        {-1,-1},{0,-1},{1,-1},
+        {-1,0},        {1,0},
+        {-1,1},{0,1},{1,1}
+    };
 
     public Board CreateBoard()
     {
@@ -16,11 +22,11 @@ public class BoardFactory // 内部処理で扱う盤面情報を生成するFac
         Cell[,,] cells = new Cell[stgs.layer, loCount, laCount];
         for (int l = 0; l < stgs.layer; l++)
         {
-            for (int lo = 1; lo < loCount; lo++) // 一番上は重なるので考えないものとする
+            for (int lo = 0; lo < loCount; lo++) // 一番上は重なるので考えないものとする
             {
-                for (int la = 0; la < laCount; la++)
+                for (int la = 1; la < laCount; la++)
                 {
-                    Debug.Log($"({l},{lo},{la})という添え字番号にCellが格納されました");
+                    // Debug.Log($"({l},{lo},{la})という添え字番号にCellが格納されました");
                     cells[l, lo, la] = new Cell(l, lo, la, false, false, false, 0);
                 }
             }
@@ -30,12 +36,23 @@ public class BoardFactory // 内部処理で扱う盤面情報を生成するFac
         while (mines.Count < stgs.mines) // 指定数の地雷を生成する
         {
             int x = Random.Range(0, loCount);
-            int y = Random.Range(0, laCount);
+            int y = Random.Range(1, laCount);
             int layer = Random.Range(0, stgs.layer);
             Cell cell = cells[layer, x, y];
             if (cell.isMine) continue;
             cell.isMine = true;
+            Debug.Log($"({layer},{x},{y})に地雷が設置されました");
             mines.Add(cell);
+            for (int i = 0; i < neighbors.GetLength(0); i++)
+            {
+                int nx = x + neighbors[i, 0];
+                int ny = y + neighbors[i, 1];
+                if (ny <= 0 || ny >= laCount) continue;
+                int true_nx = (nx % loCount + loCount) % loCount;
+                Cell neighbor_cell = cells[layer, true_nx, ny];
+                neighbor_cell.aroundMineCount++;
+                Debug.Log($"({layer},{true_nx},{ny})が地雷に近接しているマスです");
+            }
         }
         return new Board(cells);
     }
