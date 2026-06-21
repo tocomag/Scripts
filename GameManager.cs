@@ -1,7 +1,7 @@
 using UnityEngine;
 public class GameManager : MonoBehaviour
 {
-    private BoardSettings stgs;
+    [SerializeField] private BoardSettings stgs;
     private Board board;
     void Awake()
     {
