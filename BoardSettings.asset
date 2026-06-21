@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40e8ed2bd2533004dbdf300c8eeb0d83, type: 3}
   m_Name: BoardSettings
   m_EditorClassIdentifier: Assembly-CSharp::BoardSettings
-  radius: 0
-  longtitudeInterval: 0
-  latitudeInterval: 0
-  layer: 0
-  reductionRatioPerLayer: 0
+  radius: 3
+  longtitudeInterval: 15
+  latitudeInterval: 15
+  layer: 1
+  reductionRatioPerLayer: 1
+  mines: 10
+  cellHealth: 0
+  playerDamage: 0
+  mineDamage: 0

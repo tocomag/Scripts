@@ -12,4 +12,5 @@ public class BoardSettings : ScriptableObject
     public int cellHealth; // マスの体力
     public int playerDamage; // プレイヤーの攻撃力
     public int mineDamage; // 地雷の攻撃力
+    public int availableFlags; // 利用可能な旗の数
 }

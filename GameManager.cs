@@ -1,8 +1,8 @@
 using UnityEngine;
 public class GameManager : MonoBehaviour
 {
-    public BoardSettings stgs;
-    public Board board;
+    private BoardSettings stgs;
+    private Board board;
     void Awake()
     {
         var bFactory = new BoardFactory(stgs);
